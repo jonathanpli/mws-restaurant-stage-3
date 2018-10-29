@@ -8,10 +8,23 @@
  * For more information on bootstrapping your app, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
  */
+const restaurants = require('../assets/data/restaurants'),
+  reviews = require('../assets/data/reviews');
 
-module.exports.bootstrap = function(cb) {
-
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+module.exports.bootstrap = async (cb) => {
+  if (process.env.NODE_ENV === 'production') {
+    return cb();
+  }
+  
+  let count = await Restaurants.count();
+  if (count > 0) {
+    return cb();
+  }
+  
+  // Seed data
+  restaurants.forEach(async (restaurant) => {
+    restaurant.reviews = reviews.filter(review => { return review.restaurant_id === restaurant.id });
+    await Restaurants.create(restaurant);
+  });
   cb();
 };

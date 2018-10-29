@@ -1,10 +1,33 @@
 /**
  * Reviews.js
  *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @description :: Represents a restaurant review
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
-  attributes: {}
+  
+  attributes: {
+    id: {
+      type: 'integer',
+      required: true
+    },
+    restaurant_id: {
+      type: 'integer',
+      required: true
+    },
+    name: {
+      type: 'string',
+      required: true
+    },
+    rating: {
+      type: 'integer',
+      required: true
+    },
+    comments: {
+      type: 'string',
+      required: false
+    }
+  }
+  
 };
