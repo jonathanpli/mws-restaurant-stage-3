@@ -23,7 +23,10 @@ module.exports = {
   attributes: {
     id: {
       type: 'integer',
-      required: true
+      unique: true,
+      required: false,
+      primaryKey: true,
+      autoIncrement: true
     },
     name: {
       type: 'string',

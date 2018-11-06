@@ -23,8 +23,11 @@ module.exports.bootstrap = async (cb) => {
   
   // Seed data
   restaurants.forEach(async (restaurant) => {
-    restaurant.reviews = reviews.filter(review => { return review.restaurant_id === restaurant.id });
     await Restaurants.create(restaurant);
+  });
+  
+  reviews.forEach(async (review) => {
+    await Reviews.create(review);
   });
   cb();
 };

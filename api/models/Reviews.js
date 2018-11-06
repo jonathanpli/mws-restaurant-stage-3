@@ -10,7 +10,10 @@ module.exports = {
   attributes: {
     id: {
       type: 'integer',
-      required: true
+      unique: true,
+      required: false,
+      primaryKey: true,
+      autoIncrement: true
     },
     restaurant_id: {
       type: 'integer',
